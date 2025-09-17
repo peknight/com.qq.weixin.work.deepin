@@ -11,15 +11,17 @@ license=('custom')
 depends=(
         'spark-dwine-helper'
         'deepin-wine10-stable'
-        'wqy-microhei'
 )
 source=(
     "${url}${pkgname}_${pkgver//_/-}_all.deb"
+    "https://nexus.peknight.com/repository/raw-group/v1/https/github.com/anthonyfok/fonts-wqy-microhei/raw/refs/heads/master/wqy-microhei.ttc"
 )
-sha256sums=('a462be7eb76218e9bea55a3ffa656669768de8fa6b224dcaba86c148265f2bc8')
+sha256sums=('a462be7eb76218e9bea55a3ffa656669768de8fa6b224dcaba86c148265f2bc8'
+            'e4bca8df123ce01b104780f576ea1a58b9a5ff1662a91124b6d3180cb6c88212')
 install="wecom.install"
 
 package() {
-    cp -r ${srcdir}/opt "${pkgdir}/"
+    bsdtar -xf "${srcdir}/data.tar.xz" -C "${pkgdir}/"
+    install -Dm644 "wqy-microhei.ttc" "${pkgdir}/usr/share/fonts/truetype/wqy/wqy-microhei.ttc"
     cp -rf ${pkgdir}/opt/apps/${pkgname}/entries/* "${pkgdir}/usr/share/"
 }
