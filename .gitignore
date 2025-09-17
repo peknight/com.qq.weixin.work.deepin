@@ -1,5 +1,6 @@
 *.deb
 *.pkg.tar.zst
 *.part
+*.ttc
 pkg/
 src/
